@@ -6,7 +6,6 @@ import 'cubit/cubit.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     MainCubit cubit =MainCubit.get(context);

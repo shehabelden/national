@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class HistoryList extends StatelessWidget {
-  const HistoryList({super.key});
-
+  const HistoryList({super.key,required this.history});
+  final List history;
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
         physics:const NeverScrollableScrollPhysics(),
-        itemCount: 6,
+        itemCount:history.length ,
         shrinkWrap: true,
         itemBuilder: (c,i){
           return  Padding(
@@ -23,12 +23,13 @@ class HistoryList extends StatelessWidget {
               ),
               SizedBox(width: 20,),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text("last check",style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 12
                   )),
-                  Text("28/10/2014",style: TextStyle(
+                  Text(history[i]["history"],style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 12,
                       color: Colors.grey.shade400

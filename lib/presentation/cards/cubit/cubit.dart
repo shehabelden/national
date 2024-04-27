@@ -11,6 +11,7 @@ class CardsCubit extends Cubit<CardMainState> {
   String ? getimage;
   Map profileMap={};
   List cardsList=[];
+  List history=[];
   List requetList=[];
   int index=0;
   static CardsCubit get(context) => BlocProvider.of(context);
@@ -70,12 +71,16 @@ class CardsCubit extends Cubit<CardMainState> {
     });
     emit(GetAllCardsState());
   }
-  getCard(stats)async{
+  getHistory()async{
     await  FirebaseFirestore.instance
         .collection("Profile")
         .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection("my_cards").doc(stats)
+        .collection("History")
         .get().then((value) {
+          history=[];
+          value.docs.forEach((element) {
+            history.add(element.data());
+          });
     });
     emit(GetCardState());
   }
