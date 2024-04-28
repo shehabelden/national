@@ -16,7 +16,7 @@ class firebaseApi {
 
   void handleMessage(RemoteMessage? message) {
     if (message == null) return;
-    navigate.currentState?.pushNamed('/hh', arguments: message);
+    navigate.currentState?.pushNamed('/hh');
   }
 
   Future initPushNotifications() async {
