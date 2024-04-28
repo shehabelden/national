@@ -6,7 +6,11 @@ class NewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(),
+      appBar: AppBar(),
+      body: Container(
+
+        child:Text("hihi"),
+      ),
     );
   }
 }
