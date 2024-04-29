@@ -10,8 +10,6 @@ class firebaseApi {
     final fcmToken = await _firebaseMessaging.getToken();
     print("Token:$fcmToken");
     initPushNotifications();
-
-
   }
 
   void handleMessage(RemoteMessage? message) {
