@@ -84,6 +84,7 @@ class NewScreen extends StatelessWidget {
                     ),
                   );
                 },
+                //
                 itemCount:
                     context.read<NotificationsCubit>().Notifications.length,
               ),
