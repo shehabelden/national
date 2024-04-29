@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../NotficationHelper/notificationHelper.dart';
 import 'Cubit/notifications_cubit.dart';
 import 'Cubit/notifications_state.dart';
 
@@ -28,13 +30,57 @@ class NewScreen extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: ListTile(
-                      title: Text(context
-                          .read<NotificationsCubit>()
-                          .Notifications[index]['Acces']),
-                      subtitle: Text(context
-                          .read<NotificationsCubit>()
-                          .Notifications[index]['Message']),
+                    child: Container(
+                      height: 120,
+                      color: Colors.white,
+                      child: Column(
+                        children: [
+                          ListTile(
+                            title: Text(
+                              context
+                                  .read<NotificationsCubit>()
+                                  .Notifications[index]['Acces'],
+                              style: TextStyle(color: Color(0xFF800f2f)),
+                            ),
+                            subtitle: Text(
+                              context
+                                  .read<NotificationsCubit>()
+                                  .Notifications[index]['Message'],
+                              style: TextStyle(color: Color(0xFF800f2f)),
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Spacer(),
+                              InkWell(
+                                onTap: () async {
+                                  BlocProvider.of<NotificationsCubit>(context)
+                                      .StartNotification(
+                                          FirebaseAuth.instance.currentUser!
+                                              .displayName,
+                                          FirebaseAuth
+                                              .instance.currentUser!.uid);
+                                  await firebaseApi().initNotifications();
+                                },
+                                child: Text(
+                                  "Accept",
+                                  style: TextStyle(color: Color(0xFF800f2f)),
+                                ),
+                              ),
+                              Spacer(),
+                              InkWell(
+                                onTap: () {},
+                                child: Text(
+                                  "Reject",
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                              ),
+                              Spacer(),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   );
                 },
