@@ -30,6 +30,7 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       Text("  national id",style: TextStyle(
                         fontSize: 12,
+              //
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF888888),
                       ),),
