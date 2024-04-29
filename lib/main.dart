@@ -2,8 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:national/new_screen.dart';
-import 'package:national/notificationHelper.dart';
+import 'package:national/presentation/Notifications/Cubit/notifications_cubit.dart';
+import 'package:national/presentation/Notifications/new_screen.dart';
+import 'package:national/NotficationHelper/notificationHelper.dart';
 import 'package:national/presentation/auth/cubit/cubit.dart';
 import 'package:national/presentation/auth/login_check.dart';
 import 'package:national/presentation/family/cubit/cubit.dart';
@@ -24,6 +25,7 @@ void main() async {
 await firebaseApi().initNotifications();
 
   runApp(const MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
@@ -31,13 +33,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return MultiBlocProvider(
+
       providers: [
         BlocProvider(create: (context) => AuthCubit()),
         BlocProvider(create: (context) => MainCubit()),
         BlocProvider(create: (context) => FamilyCubit()),
         BlocProvider(create: (context) => CardsCubit()),
         BlocProvider(create: (context) => AllCardsCubit()),
+        BlocProvider(create: (context)=>NotificationsCubit()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -48,9 +53,8 @@ class MyApp extends StatelessWidget {
         initialRoute:"/home",
         routes: {
           "/home": (context) => LoginCheck(),
-          '/hh': (context) => NewScreen(),
         },
-        home: const NewScreen(),
+        home: const LoginCheck(),
       ),
     );
   }
