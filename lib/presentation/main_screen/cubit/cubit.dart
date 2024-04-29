@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:national/presentation/request/RequestScreen.dart';
 
+import '../../../new_screen.dart';
 import '../../cards/card_screen.dart';
 import '../../family/family_screen.dart';
 import 'state.dart';
@@ -13,6 +14,7 @@ class MainCubit extends Cubit<MainState> {
     CardScreen(),
     FamilyScreen(),
     RequestScreen(),
+    NewScreen()
   ];
   int index=0;
   screenCubit(i){

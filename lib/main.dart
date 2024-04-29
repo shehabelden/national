@@ -45,12 +45,12 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        initialRoute: "/home",
+        initialRoute:"/home",
         routes: {
           "/home": (context) => LoginCheck(),
           '/hh': (context) => NewScreen(),
         },
-        home: const LoginCheck(),
+        home: const NewScreen(),
       ),
     );
   }
