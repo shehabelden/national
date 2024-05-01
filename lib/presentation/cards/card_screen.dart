@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:national/presentation/cards/cubit/state.dart';
+import 'package:national/presentation/my_card/my_card.dart';
 import '../all_cards/all_cards_screen.dart';
 import 'cubit/cubit.dart';
 import 'widget/card_image.dart';
@@ -11,6 +12,7 @@ class CardScreen extends StatelessWidget{
   Widget build(BuildContext context) {
     CardsCubit cubit=CardsCubit.get(context);
     cubit.getMyDataCubit();
+    cubit.getHistory();
     return BlocBuilder<CardsCubit,CardMainState>(
         builder: (context,state) {
         return SingleChildScrollView(
@@ -51,19 +53,27 @@ class CardScreen extends StatelessWidget{
                       ),
                     ),
                     const SizedBox(width: 20,),
-                    Container(
-                      height: 40,
-                      width: 120,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color:const Color(0xFF800f2f),
+                    InkWell(
+                      onTap:(){
+                        Navigator.push(context, MaterialPageRoute(builder: (_){
+                          return const MyCard();
+                        }));
+
+                      },
+                      child: Container(
+                        height: 40,
+                        width: 120,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color:const Color(0xFF800f2f),
+                          ),
                         ),
+                        alignment: Alignment.center,
+                        child:const Text("See Card",style: TextStyle(
+                          color: Color(0xFF800f2f),
+                        ),),
                       ),
-                      alignment: Alignment.center,
-                      child:const Text("See Card",style: TextStyle(
-                        color: Color(0xFF800f2f),
-                      ),),
                     ),
                   ],
                 ),
@@ -76,7 +86,7 @@ class CardScreen extends StatelessWidget{
                     fontSize: 24,
                   ),),
                 ),
-                const HistoryList(),
+                 HistoryList(history:cubit.history),
               ],
             ),
           ),

@@ -97,7 +97,8 @@ class FamilyScreen extends StatelessWidget {
                                           ),),
                                         ),
                                       ),
-                                    )
+                                    ),
+
                                   ],
                                 )
                               ],

@@ -6,7 +6,6 @@ import 'cubit/cubit.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     MainCubit cubit =MainCubit.get(context);
@@ -19,9 +18,14 @@ class MainScreen extends StatelessWidget {
               BottomNavigationBarItem(icon: Icon(Icons.credit_card),label: "card"),
               BottomNavigationBarItem(icon: Icon(Icons.family_restroom),label:"family"),
               BottomNavigationBarItem(icon: Icon(Icons.request_page),label:"request"),
+              BottomNavigationBarItem(icon: Icon(Icons.notifications),label:"notifications"),
+
             ],
             currentIndex :cubit.index,
+            unselectedLabelStyle: TextStyle(color: Colors.grey),
+            unselectedItemColor: Colors.grey,
             selectedItemColor:const Color(0xFF800f2f),
+            showUnselectedLabels: true,
             onTap: (i){
               cubit.screenCubit(i);
             },

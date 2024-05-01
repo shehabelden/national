@@ -8,7 +8,7 @@ class CardImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CardsCubit cubit=CardsCubit.get(context);
-    cubit.getCard(stateList[cubit.index]);
+    // cubit.getCard(stateList[cubit.index]);
     cubit.getAllCards();
     return  BlocBuilder<CardsCubit,CardMainState>(
       builder: (context,state) {

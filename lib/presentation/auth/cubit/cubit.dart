@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'state.dart';
@@ -74,10 +75,16 @@ class AuthCubit extends Cubit<AuthMainState> {
      "request_name":"update national_card",
      "status":"pending",
    });
+
    FirebaseFirestore.instance.
    collection("Profile").doc(uid).collection("my_cards").doc("Insurance").collection("update").doc("update").set({
      "request_name":"update Insurance",
      "status":"pending",
+   });
+   FirebaseMessaging.instance.getToken().then((value){
+     FirebaseFirestore.instance.collection("Profile").doc(uid).update({
+       "token":value,
+     });
    });
    FirebaseFirestore.instance.
    collection("Profile").doc(uid).collection("my_cards").doc("driving_license").collection("update").doc("update").set({

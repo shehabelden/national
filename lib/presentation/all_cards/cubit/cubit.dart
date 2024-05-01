@@ -3,7 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nfc_manager/nfc_manager.dart';
 import 'state.dart';
 import 'package:intl/intl.dart';
 class AllCardsCubit extends Cubit<AllCardsMainState> {
@@ -11,6 +13,7 @@ class AllCardsCubit extends Cubit<AllCardsMainState> {
   String ? getimage;
   List getAllCardsList=[];
   List getAllCardsListId=[];
+  ValueNotifier<dynamic> result = ValueNotifier(null);
   static AllCardsCubit get(context) => BlocProvider.of(context);
   getAllCardsCubit()async{
     emit(GetEmptyState());
@@ -58,5 +61,17 @@ class AllCardsCubit extends Cubit<AllCardsMainState> {
         .collection("my_cards").doc(stats).collection("update").doc("update")
         .update(data);
     emit(UpadteCardsState());
+  }
+  redar(){
+    NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
+      result.value = tag.data;
+      NfcManager.instance.stopSession();
+      FirebaseFirestore.instance
+          .collection("Profile")
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({"card":result.value.toString()});
+    });
+    print(result.value.toString());
+    emit(RederState());
   }
 }
